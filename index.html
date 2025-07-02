@@ -208,11 +208,10 @@
   <div class="container">
     <div id="main-content">
       <h1 style="color:#fefefe;">Von der KI-Ratlosigkeit zur klaren Anwendung</h1>
-      <div class="intro-text" style="background:rgba(255,255,255,0.10);color:#fefefe;padding:18px 18px 14px 18px;border-radius:14px;margin-bottom:18px;font-size:1.13rem;text-align:center;">
-        Herzlich willkommen! Dieser Fragenkatalog ist speziell für den allerersten Einstieg in die Welt der KI-Tools gedacht.<br><br>
+      <div class="intro-text" id="intro-text" style="background:rgba(255,255,255,0.10);color:#fefefe;padding:18px 18px 14px 18px;border-radius:14px;margin-bottom:18px;font-size:1.13rem;text-align:center;">
+        Dieser Fragenkatalog ist speziell für den allerersten Einstieg in die Welt der KI-Tools gedacht.<br><br>
         Du erhältst hier keine abschließende Beratung, sondern erste Anregungen und Inspiration, welche Tools dich im Arbeitsalltag unterstützen könnten.<br><br>
-        Probiere es einfach aus – und lass dich überraschen, was möglich ist!
-        <br><br>
+        Probiere es einfach aus – und lass dich überraschen, was möglich ist!<br><br>
         Beate steht dir auch gerne beratend zur Seite.
       </div>
       <div class="teaser">Finde mit wenigen Klicks heraus, welche KI-Tools dich im Arbeitsalltag wirklich weiterbringen.<br><br>
@@ -295,6 +294,7 @@
     // Schritt 1: Landing/Intro
     document.getElementById('start-link').onclick = function(e) {
       e.preventDefault();
+      document.getElementById('intro-text').style.display = 'none';
       showFragenkatalog();
     };
 
