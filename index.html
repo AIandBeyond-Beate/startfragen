@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Von der KI-Ratlosigkeit zur klaren Anwendung</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      font-family: 'Raleway', Arial, sans-serif;
+      color: #fefefe;
+      background: linear-gradient(90deg, #000000 0%, #000000 70%, #023259 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .container {
+      width: 100%;
+      max-width: 520px;
+      margin: 40px auto 0 auto;
+      background: rgba(2, 50, 89, 0.7);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      padding: 32px 24px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo {
+      width: 120px;
+      margin-bottom: 24px;
+      display: block;
+    }
+    h1 {
+      color: #a706ad;
+      font-size: 2rem;
+      margin-bottom: 12px;
+      text-align: center;
+      font-family: 'Raleway', Arial, sans-serif;
+      font-weight: 700;
+    }
+    h2 {
+      color: #0cc0df;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      text-align: center;
+      font-family: 'Raleway', Arial, sans-serif;
+      font-weight: 700;
+    }
+    p, .teaser {
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+      text-align: center;
+      color: #fefefe;
+    }
+    .start-btn, .action-btn {
+      background: #a706ad;
+      color: #fefefe;
+      border: none;
+      border-radius: 8px;
+      padding: 16px 32px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      margin: 12px 0;
+      min-width: 180px;
+      display: inline-block;
+    }
+    .start-btn:hover, .action-btn:hover {
+      background: #7c057e;
+    }
+    .action-btn:disabled {
+      background: #ccc;
+      color: #888;
+      cursor: not-allowed;
+    }
+    .footer {
+      width: 100%;
+      text-align: center;
+      padding: 24px 0 12px 0;
+      color: #fefefe;
+      font-size: 1rem;
+      opacity: 0.7;
+      background: transparent;
+      z-index: 10;
+    }
+    .footer a {
+      color: #fff;
+      text-decoration: underline;
+      margin: 0 8px;
+      transition: color 0.2s;
+    }
+    .footer a:hover {
+      color: #a706ad;
+    }
+    .panel {
+      border-radius: 14px;
+      margin-bottom: 24px;
+      padding: 18px 18px 12px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      color: #000000;
+      background: #f3eaff;
+      font-family: 'Raleway', Arial, sans-serif;
+    }
+    .panel-title {
+      font-family: 'Raleway', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .notiz {
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      font-size: 1rem;
+      margin-top: 4px;
+      background: #fff;
+      color: #000;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .tool-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px 18px 12px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      color: #000;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto 32px auto;
+      min-width: 220px;
+      box-sizing: border-box;
+    }
+    .category-icon {
+      width: 28px;
+      height: 28px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    .big-checkbox {
+      transform: scale(1.3);
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    .button-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 32px;
+      margin-bottom: 0;
+      flex-wrap: wrap;
+    }
+    .blue-btn {
+      background: #0cc0df;
+      color: #fff;
+    }
+    .beate-btn {
+      background: #5e17eb !important;
+      color: #fff !important;
+    }
+    .loading {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #a706ad;
+      border-radius: 50%;
+      border-top: 3px solid #fff;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 18px 6px 12px 6px;
+      }
+      .logo {
+        width: 80px;
+      }
+      .tool-card, .panel {
+        padding: 12px 6px 10px 6px;
+      }
+      .button-row {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Logo" style="max-width:180px;width:100%;height:auto;display:block;margin:32px auto 12px auto;" />
+  <div class="container">
+    <div id="main-content">
+      <h1 style="color:#fefefe;">Von der KI-Ratlosigkeit zur klaren Anwendung</h1>
+      <div class="teaser">Finde mit wenigen Klicks heraus, welche KI-Tools dich im Arbeitsalltag wirklich weiterbringen.<br><br>
+        <a href="#" id="start-link" class="start-btn">Fragenkatalog starten</a>
+      </div>
+      <div id="fragekatalog" style="display:none;"></div>
+      <div id="auswertung" style="display:none;"></div>
+    </div>
+  </div>
+  <footer class="footer">
+    <a href="#" id="impressum-link">Impressum</a> | <a href="#" id="datenschutz-link">Datenschutz</a>
+  </footer>
+  <script>
+    // Fragenkatalog: 7 Sektionen, Radio-Buttons (Ja/Nein), Präsentationsfragen überarbeitet
+    const fragen = [
+      { kategorie: 'automation', icon: '⚙️', text: 'Hast du Aufgaben, die sich ständig wiederholen oder dich Zeit kosten?', freetext: true },
+      { kategorie: 'automation', icon: '⏳', text: 'Gibt es Tätigkeiten, die du gerne automatisieren würdest?', freetext: true },
+      { kategorie: 'automation', icon: '🔁', text: 'Schiebst du Aufgaben auf, die sich automatisieren ließen?', freetext: true },
+      { kategorie: 'communication', icon: '✉️', text: 'Schreibst du oft ähnliche E-Mails, Nachrichten oder Protokolle?', freetext: false },
+      { kategorie: 'communication', icon: '💬', text: 'Wünschst du dir, wiederkehrende Fragen automatisch beantworten zu können?', freetext: false },
+      { kategorie: 'communication', icon: '📝', text: 'Brauchst du oft sehr lange für längere Texte oder Zusammenfassungen?', freetext: false },
+      // Präsentation: 1. Zeit sparen, 2. Design, 3. Struktur/Konzept
+      { kategorie: 'presentation', icon: '📊', text: 'Erstellst du regelmäßig Präsentationen und möchtest dabei Zeit sparen?', freetext: false },
+      { kategorie: 'presentation', icon: '🎨', text: 'Wünschst du dir Unterstützung beim Design von Präsentationen (Layout, Farben, Visuals)?', freetext: false },
+      { kategorie: 'presentation', icon: '🧩', text: 'Brauchst du Hilfe bei Struktur, Gliederung oder Storyline deiner Präsentationen?', freetext: false },
+      { kategorie: 'organization', icon: '🗂️', text: 'Fällt es dir schwer, Aufgaben zu priorisieren oder Projekte zu strukturieren?', freetext: false },
+      { kategorie: 'organization', icon: '🧠', text: 'Wünschst du dir einen Denkpartner für Struktur und Organisation?', freetext: false },
+      { kategorie: 'organization', icon: '📅', text: 'Hast du manchmal zu viele Informationen und zu wenig Überblick?', freetext: false },
+      { kategorie: 'research', icon: '🔍', text: 'Musst du regelmäßig Informationen zusammentragen, vergleichen oder zusammenfassen?', freetext: false },
+      { kategorie: 'research', icon: '📚', text: 'Verbringst du viel Zeit mit dem Lesen oder Aufbereiten von Fachwissen?', freetext: false },
+      { kategorie: 'research', icon: '📰', text: 'Wäre es für dich hilfreich, Inhalte schneller auf den Punkt gebracht zu bekommen?', freetext: false }
+    ];
+
+    // Tool-Empfehlungen und Erklärungssätze (vereinfacht, Kategorie-Namen angepasst)
+    const recommendations = {
+      automation: [
+        { tool: "ChatGPT GPT-4o", note: "Hilft dir, wiederkehrende Aufgaben wie E-Mails, Texte oder Listen automatisch zu erledigen.", link: "https://chat.openai.com/" },
+        { tool: "o4-mini-high", note: "Für schnelle, einfache Automatisierungen wie Textvorlagen oder kurze Antworten.", link: "https://chat.openai.com/" },
+        { tool: "Copilot Business in Microsoft 365", note: "Beantwortet E-Mails automatisch und unterstützt dich bei Routinen in Outlook/Teams.", link: "https://www.microsoft.com/de-de/microsoft-365/copilot" },
+        { tool: "Gemini 2.5 Pro", note: "Erstellt automatisch Texte oder hilft dir, Aufgaben schneller abzuarbeiten.", link: "https://gemini.google.com/" },
+        { tool: "NotebookLM (Google-Subscription)", note: "Speichert Abläufe und Notizen, damit du sie immer wieder nutzen kannst.", link: "https://notebooklm.google/" }
+      ],
+      communication: [
+        { tool: "Claude Sonnet 4", note: "Formuliert längere E-Mails oder Protokolle für dich.", link: "https://claude.ai/" },
+        { tool: "ChatGPT o4-mini", note: "Schreibt dir schnell kurze Texte oder Antworten.", link: "https://chat.openai.com/" },
+        { tool: "Perplexity", note: "Fasst Informationen für dich zusammen oder prüft Fakten.", link: "https://www.perplexity.ai/" }
+      ],
+      presentation: [
+        { tool: "Gamma Pro", note: "Erstellt komplette Präsentationen mit Layout und Inhalt für dich.", link: "https://gamma.app/" },
+        { tool: "Copilot (Privat)", note: "Macht dir in Sekunden erste Folienentwürfe in PowerPoint.", link: "https://www.microsoft.com/de-de/microsoft-365/copilot" },
+        { tool: "NotebookLM (kostenfrei)", note: "Hilft dir, Ideen zu sammeln und Gliederungen vorzuschlagen.", link: "https://notebooklm.google/" }
+      ],
+      organization: [
+        { tool: "Copilot Business (M365)", note: "Sortiert Aufgaben und Termine für dich in Outlook oder Planner.", link: "https://www.microsoft.com/de-de/microsoft-365/copilot" },
+        { tool: "ChatGPT GPT-4o", note: "Erstellt To-Do-Listen oder hilft dir, Dinge zu ordnen.", link: "https://chat.openai.com/" },
+        { tool: "ChatGPT o3", note: "Beantwortet dir schnell Fragen zu deiner Organisation.", link: "https://chat.openai.com/" },
+        { tool: "Perplexity", note: "Hilft dir, Ideen zu sortieren oder grobe Übersichten zu machen.", link: "https://www.perplexity.ai/" }
+      ],
+      research: [
+        { tool: "NotebookLM (Google-Subscription)", note: "Sammelt und speichert Wissen und Notizen für dich.", link: "https://notebooklm.google/" },
+        { tool: "Perplexity", note: "Findet schnell Informationen im Internet und gibt dir Quellen.", link: "https://www.perplexity.ai/" },
+        { tool: "Claude Opus 4", note: "Erklärt dir auch komplexe Themen ausführlich.", link: "https://claude.ai/" },
+        { tool: "Haiku 3.5", note: "Fasst lange Texte für dich kurz zusammen.", link: "https://haiku.ai/" }
+      ]
+    };
+
+    // State
+    let selected = [];
+    let freetexts = {};
+
+    // Icons für Kategorien
+    const categoryIcons = {
+      automation: '⚙️',
+      communication: '✉️',
+      presentation: '📊',
+      organization: '🗂️',
+      research: '🔍'
+    };
+
+    // Schritt 1: Landing/Intro
+    document.getElementById('start-link').onclick = function(e) {
+      e.preventDefault();
+      showFragenkatalog();
+    };
+
+    function showFragenkatalog() {
+      document.querySelector('.teaser').style.display = 'none';
+      const frageDiv = document.getElementById('fragekatalog');
+      frageDiv.style.display = 'block';
+      frageDiv.innerHTML = '<form id="fragenForm"></form>';
+      const form = frageDiv.querySelector('#fragenForm');
+      fragen.forEach((frage, idx) => {
+        const panelColor = idx%2===0 ? '#f3eaff' : '#fff';
+        form.innerHTML += `
+          <div class="panel" style="background:${panelColor};">
+            <div class="panel-title"><span class="category-icon">${frage.icon}</span> ${frage.text}</div>
+            <label><input type="radio" class="big-checkbox" name="frage${idx}" value="ja"> Ja</label>
+            <label style="margin-left:18px;"><input type="radio" class="big-checkbox" name="frage${idx}" value="nein"> Nein</label>
+            ${frage.freetext ? `<div style='margin-top:1.2em;'></div><input type="text" class="notiz" name="notiz${idx}" placeholder="Was genau? (optional)">` : ''}
+          </div>
+        `;
+      });
+      form.innerHTML += `<div class="button-row">
+        <button class="action-btn" id="auswertungBtn" type="button" disabled>Auswertung anzeigen</button>
+      </div>`;
+      form.addEventListener('input', function() {
+        const checked = form.querySelectorAll('input[type=radio][value=ja]:checked').length;
+        document.getElementById('auswertungBtn').disabled = checked < 1;
+      });
+      document.getElementById('auswertungBtn').onclick = function() {
+        // Loading Animation
+        this.innerHTML = 'Bitte warten <span class="loading"></span>';
+        this.disabled = true;
+        setTimeout(() => {
+          auswertungAnzeigen();
+        }, 600);
+      };
+    }
+
+    function auswertungAnzeigen() {
+      // Antworten sammeln
+      const form = document.getElementById('fragenForm');
+      selected = [];
+      freetexts = {};
+      let allFreetextArr = [];
+      fragen.forEach((frage, idx) => {
+        const val = form.querySelector(`input[name=frage${idx}]:checked`);
+        // Freitext immer sammeln, egal ob Ja oder Nein
+        if (frage.freetext) {
+          const notiz = form.querySelector(`input[name=notiz${idx}]`).value.trim();
+          if (notiz) {
+            freetexts[frage.kategorie] = notiz;
+            allFreetextArr.push(notiz);
+          }
+        }
+        if (val && val.value === 'ja') {
+          selected.push(frage.kategorie);
+        }
+      });
+      // Freitext global nach Schlüsselbegriffen durchsuchen und passende Kategorien ergänzen
+      let allFreetext = allFreetextArr.join(' ').toLowerCase();
+      const keywordMap = {
+        presentation: ['präsentation', 'folien', 'folie', 'powerpoint', 'slides', 'vortrag'],
+        communication: ['protokoll', 'agenda', 'notiz', 'bericht', 'e-mail', 'nachricht', 'text', 'antwort'],
+        research: ['zusammenfassung', 'überblick', 'recherche', 'fachwissen', 'information', 'informationen'],
+        organization: ['to-do', 'aufgabe', 'planung', 'struktur', 'organisation', 'priorität']
+      };
+      Object.entries(keywordMap).forEach(([cat, keywords]) => {
+        if (keywords.some(word => allFreetext.includes(word))) {
+          if (!selected.includes(cat)) selected.push(cat);
+        }
+      });
+      // Nur Kategorien mit Auswahl
+      const uniqueCats = [...new Set(selected)];
+      // Rendern
+      const auswertungDiv = document.getElementById('auswertung');
+      auswertungDiv.style.display = 'block';
+      document.getElementById('fragekatalog').style.display = 'none';
+      let html = `<div class='panel' style='background:#fff;color:#000;margin-bottom:32px;'>
+        <b>Hinweis:</b><br>
+        <div style='margin-top:0.7em;'></div>
+        <div>Dies ist nur eine Auswahl gängiger KI-Tools und Modelle. Es gibt viele weitere Anbieter auf dem Markt.</div>
+        <div style='margin-top:0.7em;'></div>
+        <div>Für den Einstieg empfehle ich dir jedoch, dich zunächst mit diesen vertraut zu machen.</div>
+        <div style='margin-top:0.7em;'></div>
+        <div>Für tiefergehende Beratung melde dich gerne direkt bei mir: <b><a href='https://www.ai-and-beyond-consulting.de/#Contact' target='_blank' style='color:#a706ad;'>Kontakt.</a></b></div>
+      </div>`;
+      html += `<h2>Auswertung deiner Antworten – meine Tool-Empfehlungen</h2>`;
+      uniqueCats.forEach(cat => {
+        html += `<div class="tool-card">
+          <div style="font-weight:bold;font-size:1.1rem;margin-bottom:8px;"><span class="category-icon">${categoryIcons[cat]}</span> ${getCategoryName(cat)}</div>
+          <ul style="padding-left:18px;list-style-type:disc;">`;
+        recommendations[cat].forEach(tool => {
+          html += `<li style="margin-bottom:14px;">
+            <a href="${tool.link}" target="_blank" style="color:#a706ad;font-weight:bold;text-decoration:underline;font-size:1.08em;">${tool.tool}</a><br>
+            <span style="color:#222;font-size:1em;">${tool.note}</span>
+          </li>`;
+        });
+        html += `</ul>`;
+        if (freetexts[cat]) {
+          html += `<div class="notiz" style="margin-top:10px;">Deine Notiz: ${freetexts[cat]}</div>`;
+        }
+        html += `</div>`;
+      });
+      html += `<div class="button-row">
+         <button class="action-btn" onclick="window.location.reload()">Neu starten</button>
+         <button class="action-btn blue-btn" onclick="zeigeAlleTools()">Alle Tool-Kategorien anzeigen</button>
+         <a href="https://www.ai-and-beyond-consulting.de/#Contact" target="_blank" class="action-btn beate-btn" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Beate kostenfrei kontaktieren</a>
+       </div>`;
+      html += `<div style='text-align:center;color:#888;font-size:0.98em;margin-top:36px;margin-bottom:8px;'>Diese Auswertung wurde mit KI erstellt und kann Fehler enthalten.</div>`;
+      auswertungDiv.innerHTML = html;
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function getCategoryName(key) {
+      switch(key) {
+        case 'automation': return 'Für wiederholbare Aktionen';
+        case 'communication': return 'Texte & Kommunikation';
+        case 'presentation': return 'Präsentationen erstellen';
+        case 'organization': return 'Ordnung & Planung';
+        case 'research': return 'Suchen & Zusammenfassen';
+        default: return key;
+      }
+    }
+
+    // Alle Tool-Kategorien anzeigen
+    window.zeigeAlleTools = function() {
+      const auswertungDiv = document.getElementById('auswertung');
+      auswertungDiv.style.display = 'block';
+      document.getElementById('fragekatalog').style.display = 'none';
+      let html = `<h2>Alle KI-Tool-Kategorien im Überblick</h2>`;
+      Object.keys(recommendations).forEach(cat => {
+        html += `<div class="tool-card">
+          <div style="font-weight:bold;font-size:1.1rem;margin-bottom:8px;"><span class="category-icon">${categoryIcons[cat]}</span> ${getCategoryName(cat)}</div>
+          <ul style="padding-left:18px;list-style-type:disc;">`;
+        recommendations[cat].forEach(tool => {
+          html += `<li style="margin-bottom:14px;">
+            <a href="${tool.link}" target="_blank" style="color:#a706ad;font-weight:bold;text-decoration:underline;font-size:1.08em;">${tool.tool}</a><br>
+            <span style="color:#222;font-size:1em;">${tool.note}</span>
+          </li>`;
+        });
+        html += `</ul></div>`;
+      });
+      html += `<div class="button-row">
+         <button class="action-btn" onclick="window.location.reload()">Neu starten</button>
+         <a href="https://www.ai-and-beyond-consulting.de/#Contact" target="_blank" class="action-btn beate-btn" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Beate kostenfrei kontaktieren</a>
+       </div>`;
+      auswertungDiv.innerHTML = html;
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  </script>
+</body>
+</html> 
